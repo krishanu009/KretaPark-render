@@ -1,0 +1,5 @@
+
+{
+    "PAGES": {"HOME":"home","UPLOAD":"upload" , "CALENDERVIEW": "calenderview", "MEETING_ROOMS": "meeting_rooms", "SCRIPTS": "scripts","POST_VIEW":"postView", "TEXT_EDITOR": "textEditor","TEAM":"team"},
+    "CONTENT": {"SCHEDULED":"scheduled","NOT_SCHEDULED":"notScheduled"}
+}

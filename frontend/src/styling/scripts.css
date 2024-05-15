@@ -1,0 +1,114 @@
+.docThumbnail
+{
+    background-color: white;
+    width: 168px;
+    height: 197px;
+    float: left;
+    margin: 10px;
+    cursor: pointer;
+    border: 1px solid var(--text-color);
+    box-shadow: #282828;
+}
+/* .docThumbnail:hover
+{
+    border: 5px solid #0024c6;
+} */
+.docInfo
+{
+    margin-top: 132px;
+    width: 169px;
+    height: 69px;
+    background-color: #cdcdcd;
+}
+.docInfo:hover
+{
+    height:75px;
+}
+.docText
+{
+    margin: 7px;
+    text-overflow: ellipsis;
+    font-size: small;
+    color: #373636;
+}
+.newDoc
+{
+    cursor: pointer;
+}
+.backButton
+{
+    position: fixed;
+    top: 135px;
+    left: 166px;
+    cursor: pointer;
+    z-index: 6;
+}
+.docTitle
+{
+    position: fixed;
+    top: 132px;
+    left: 214px;
+    cursor: pointer;
+    z-index: 6;
+    width: 182px;
+}
+.newDoc:hover
+{
+    width: 210px;
+    height: 210px;
+    
+}
+.script-container
+{
+    margin-top: 105px;
+    color: var(--text-color);
+}
+#textContainer
+{
+    margin-top: 106px;
+    padding-top: 14px;
+    padding-bottom: 50px;
+    background-color: rgb(68,76,86);
+}
+.ql-toolbar.ql-snow {
+   
+    /* width: 500px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    border: none;
+    top: 64px;
+    left:20px;
+    position: fixed;
+    z-index: 1;
+    padding-top: 2opx;
+}
+.ql-container.ql-snow
+{
+    border: 1px solid #282828;
+  display: flex;
+  justify-content: center;
+ 
+}
+.ql-container
+{
+    border: 1px solid #282828;
+    
+ 
+ 
+}
+.ql-editor
+{
+width: 8.5in;
+min-height: 11in;
+padding: 2in;
+box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+background-color: white;
+
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+   
+    border: none;
+}
