@@ -46,7 +46,12 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 
 const httpServer = createServer(app);
-const io = new Server(httpServer, { });
+const io = new Server(httpServer, {
+    cors: {
+      origin: "https://kretapark-ui.onrender.com",
+      methods: ["GET", "POST"],
+    },
+  });
 console.log("socket",io);
 
 // server.listen(process.env.PORT || 3001, () => {
