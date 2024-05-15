@@ -4,7 +4,7 @@ const Script = require("./models/scriptModel");
 const Message = require("./models/messageModel");
 
 const app = express();
-
+const path = require("path");
 var cors = require("cors");
 const corsOptions = {
   origin: 'https://kretapark-ui.onrender.com',
@@ -16,7 +16,7 @@ app.use(cors(corsOptions));
 // app.use(cors());
 const dotEnv = require("dotenv").config();
 const connectDb = require("./config/dbConnection");
-const path = require("path");
+
 connectDb();
 const port = process.env.PORT || 5000;
 // const io = require("socket.io")(3001, {
@@ -191,7 +191,7 @@ app.use("/api/room", require("./routes/roomRoutes"));
 app.use("/api/team", require("./routes/teamRoutes"));
 app.use(errorHandler);
 // --------------------------deployment------------------------------
-const path = require("path");
+
 const __dirname1 = path.resolve();
 
 
