@@ -37,8 +37,8 @@ const port = process.env.PORT || 5000;
 const server = require('http').createServer(app);
 const io = require("socket.io")(server);
 server.listen(process.env.PORT || 3000, function() {
-  var host = http.address().address
-  var port = http.address().port
+  var host = server.address().address
+  var port = server.address().port
   console.log('App listening at https://%s:%s', host, port)
 });;
 console.log("socket",io);

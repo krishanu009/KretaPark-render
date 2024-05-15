@@ -34,7 +34,7 @@ function TextEditor({scripId,title,setTitle,userInfo}) {
   }, []); 
   useEffect(() => {
     // const s = io("http://localhost:3001");
-    const s = io('https://kreta-park-ui.vercel.app');
+    const s = io('https://kretapark.onrender.com');
     setSocket(s);
     console.log("socket", s);
     return () => {
