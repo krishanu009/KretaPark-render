@@ -56,7 +56,7 @@ const io = new Server(httpServer,{
    allowEIO3: true,
   });
 console.log("socket",io);
-httpServer.listen(3000);
+httpServer.listen(80);
 // server.listen(process.env.PORT || 3001, () => {
 //   console.log('Server running on port', process.env.PORT || 3001);
 // });
