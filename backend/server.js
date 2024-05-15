@@ -42,34 +42,21 @@ const port = process.env.PORT || 5000;
 //   console.log('App listening at https://%s:%s', host, port)
 // });
 
-// const { createServer } = require("http");
-// const { Server } = require("socket.io");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
-// const httpServer = createServer(app);
-// const io = new Server(httpServer,{
-//   cors: {
-//    origin: "*",
-//    methods: ["GET", "POST"],
-//    transports: ["websocket", "polling"],
-//    credentials: true,
-//   },
-//    allowEIO3: true,
-//   });
-// console.log("socket",io);
-// httpServer.listen(80);
-
-var https = require('https');
-var io = require('socket.io')(server);
-var options = {
-  key: '',
-  cert: '',
-  ca: '',
-
-  requestCert: false,
-  rejectUnauthorized: false
-}
-var server = https.createServer(options, app);
-    server.listen(8080);
+const httpServer = createServer(app);
+const io = new Server(httpServer,{
+  cors: {
+   origin: "*",
+   methods: ["GET", "POST"],
+   transports: ["websocket", "polling"],
+   credentials: true,
+  },
+   allowEIO3: true,
+  });
+console.log("socket",io);
+httpServer.listen(80);
 // server.listen(process.env.PORT || 3001, () => {
 //   console.log('Server running on port', process.env.PORT || 3001);
 // });
@@ -203,7 +190,19 @@ app.use("/api/script", require("./routes/scriptRoutes"));
 app.use("/api/room", require("./routes/roomRoutes"));
 app.use("/api/team", require("./routes/teamRoutes"));
 app.use(errorHandler);
+// --------------------------deployment------------------------------
+const path = require("path");
+const __dirname1 = path.resolve();
 
+
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
+
+
+// --------------------------deployment------------------------------
 // //-------------------Deployment-----------------------------------
 // const __dirname1 = path.resolve();
 
