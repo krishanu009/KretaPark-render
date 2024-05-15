@@ -46,11 +46,14 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-    cors: {
-      origin: "https://kretapark-ui.onrender.com",
-      methods: ["GET", "POST"],
-    },
+const io = new Server(httpServer,{
+  cors: {
+   origin: "*",
+   methods: ["GET", "POST"],
+   transports: ["websocket", "polling"],
+   credentials: true,
+  },
+   allowEIO3: true,
   });
 console.log("socket",io);
 httpServer.listen(3000);
