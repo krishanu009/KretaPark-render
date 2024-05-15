@@ -60,6 +60,14 @@ const port = process.env.PORT || 5000;
 
 var https = require('https');
 var io = require('socket.io')(server);
+var options = {
+  key: fs.readFileSync('./test_key.key'),
+  cert: fs.readFileSync('./test_cert.crt'),
+  ca: fs.readFileSync('./test_ca.crt'),
+
+  requestCert: false,
+  rejectUnauthorized: false
+}
 var server = https.createServer(options, app);
     server.listen(8080);
 // server.listen(process.env.PORT || 3001, () => {
