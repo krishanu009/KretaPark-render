@@ -41,9 +41,12 @@ const port = process.env.PORT || 5000;
 //   var port = server.address().port
 //   console.log('App listening at https://%s:%s', host, port)
 // });
+
+const { createServer } = require("http");
 const { Server } = require("socket.io");
 
-const io = new Server();
+const httpServer = createServer(app);
+const io = new Server(httpServer, { });
 console.log("socket",io);
 
 // server.listen(process.env.PORT || 3001, () => {
