@@ -34,7 +34,15 @@ function TextEditor({scripId,title,setTitle,userInfo}) {
   }, []); 
   useEffect(() => {
     // const s = io("http://localhost:3001");
-    const s = io('https://kretapark.onrender.com');
+    const s = io('https://kretapark.onrender.com',{
+      reconnectionDelay: 1000,
+      reconnection: true,
+      reconnectionAttemps: 10,
+      transports: ['websocket'],
+      agent: false,
+      upgrade: false,
+      rejectUnauthorized: false
+  });
     setSocket(s);
     console.log("socket", s);
     return () => {
