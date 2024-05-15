@@ -6,14 +6,14 @@ const Message = require("./models/messageModel");
 const app = express();
 
 var cors = require("cors");
-// const corsOptions = {
-//   origin: 'https://kreta-park-ui.vercel.app',
-//   methods: ["GET", "POST"],
-//   credentials:true
-// };
+const corsOptions = {
+  origin: 'https://kretapark-ui.onrender.com',
+  methods: ["GET", "POST"],
+  credentials:true
+};
 
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 const dotEnv = require("dotenv").config();
 const connectDb = require("./config/dbConnection");
 const path = require("path");
