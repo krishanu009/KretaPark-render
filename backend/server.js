@@ -41,22 +41,33 @@ const port = process.env.PORT || 5000;
 //   var port = server.address().port
 //   console.log('App listening at https://%s:%s', host, port)
 // });
+const server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
-const { createServer } = require("http");
-const { Server } = require("socket.io");
-
-const httpServer = createServer(app);
-const io = new Server(httpServer,{
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
   cors: {
-   origin: "*",
-   methods: ["GET", "POST"],
-   transports: ["websocket", "polling"],
-   credentials: true,
+    origin: "https://kretapark.onrender.com",
+    credentials: true,
   },
-   allowEIO3: true,
-  });
-console.log("socket",io);
-httpServer.listen(80);
+});
+
+// const { createServer } = require("http");
+// const { Server } = require("socket.io");
+
+// const httpServer = createServer(app);
+// const io = new Server(httpServer,{
+//   cors: {
+//    origin: "*",
+//    methods: ["GET", "POST"],
+//    transports: ["websocket", "polling"],
+//    credentials: true,
+//   },
+//    allowEIO3: true,
+//   });
+// console.log("socket",io);
+// httpServer.listen(80);
 // server.listen(process.env.PORT || 3001, () => {
 //   console.log('Server running on port', process.env.PORT || 3001);
 // });
@@ -213,6 +224,6 @@ const __dirname1 = path.resolve();
 
 // //-------------------Deployment-----------------------------------
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
