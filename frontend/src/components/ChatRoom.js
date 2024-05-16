@@ -9,7 +9,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { io } from "socket.io-client";
 import axios from "axios";
 import { ThemeContext } from "../context/ThemeContext";
-function ChatRoom({ user }) {
+function ChatRoom({ user, setLoading }) {
   // console.log("user", user);
   const { theme, setTheme } = useContext(ThemeContext);
   const messagesContainerRef = useRef(null);
@@ -44,6 +44,7 @@ function ChatRoom({ user }) {
   }, [socket]);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(process.env.REACT_APP_FIND_ROOM_BY_MEMBER_ID + "/" + user.id, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -59,6 +60,7 @@ function ChatRoom({ user }) {
       .catch((e) => {
         console.log(e);
       });
+      setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -187,8 +189,7 @@ function ChatRoom({ user }) {
   // },[messageData]);
 
   useEffect(() => {
-    // const s = io("http://localhost:3001");
-    const s = io();
+    const s = io("http://localhost:3001");
     setSocket(s);
     // console.log("socket", s);
     // console.log("user", user);

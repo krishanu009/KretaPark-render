@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import Badge from "react-bootstrap/Badge";
 import { ThemeContext } from "../context/ThemeContext";
-function PostScheduleView({userInfo}) {
+function PostScheduleView({userInfo, setLoading}) {
 
   const { theme, setTheme } = useContext(ThemeContext);
   const [allContent, setAllContent] = useState([]);
@@ -49,8 +49,9 @@ function PostScheduleView({userInfo}) {
     getAllPost();
   }, [userInfo]);
   useEffect(() => {
+    setLoading(true);
     filterByStatus();
-
+    setLoading(false);
     // filterScheduledAndNotScheduled();
     // fetchInfoOnDate(date.toDateString());
   }, [allContent]);

@@ -5,7 +5,7 @@ import constants from "../constants.json";
 import { useState } from "react";
 import {v4 as uuidV4 } from "uuid"
 import axios from "axios";
-function Scripts({ selectedPage, setSelectedPage, setScriptId,userInfo }) {
+function Scripts({ selectedPage, setSelectedPage, setScriptId,userInfo, setLoading }) {
   const [allScript,setAllScript] = useState([]);
  
   // useEffect( ()=>{
@@ -19,6 +19,7 @@ function Scripts({ selectedPage, setSelectedPage, setScriptId,userInfo }) {
   // },[]);
   useEffect( ()=>{
     if(!userInfo.user.lastLogin) return;
+    setLoading(true);
     axios.get(process.env.REACT_APP_GET_SCRIPTS_BY_TEAMID + '/' + userInfo.user.lastLogin, { headers:{Authorization: 'Bearer ' + localStorage.getItem('token')}})
    .then((res) => {
      setAllScript(res.data);
@@ -26,10 +27,12 @@ function Scripts({ selectedPage, setSelectedPage, setScriptId,userInfo }) {
    }).catch((e) => {
      console.log(e);
    })
+   setLoading(false);
  },[]);
 
  useEffect( ()=>{
   if(!userInfo.user.lastLogin) return;
+  setLoading(true);
   axios.get(process.env.REACT_APP_GET_SCRIPTS_BY_TEAMID + '/' + userInfo.user.lastLogin, { headers:{Authorization: 'Bearer ' + localStorage.getItem('token')}})
  .then((res) => {
    setAllScript(res.data);
@@ -37,6 +40,7 @@ function Scripts({ selectedPage, setSelectedPage, setScriptId,userInfo }) {
  }).catch((e) => {
    console.log(e);
  })
+ setLoading(false);
 },[userInfo]);
 
 

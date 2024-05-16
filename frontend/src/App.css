@@ -89,3 +89,10 @@ body {
   min-height: calc(100vh - 100px);
   background-color: white;
 }
+
+.loadingBody{
+  position: fixed;
+  position: fixed;
+  top: 300px;
+  right: 750px;
+}

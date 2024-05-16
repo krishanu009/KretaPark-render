@@ -17,6 +17,7 @@ import TextEditor from "./TextEditor";
 import { Form } from "react-bootstrap";
 import PostScheduleView from "./PostScheduleView";
 import TeamManage from "./TeamManage";
+import LoadingSpinner from "./LoadingSpinner";
 
 function Dashboard_() {
   const [theme, setTheme] = useState("light");
@@ -27,6 +28,7 @@ function Dashboard_() {
   const [user, setUser] = useState({});
   const [title, setTitle] = useState();
   const [userInfo, setUserInfo] = useState({});
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (
       localStorage.getItem("token") == "" ||
@@ -108,6 +110,8 @@ function Dashboard_() {
           ></SideBar>
         </Col>
         <Col>
+        
+        {loading === true && (<LoadingSpinner></LoadingSpinner>)}
           {selectedPage === constants.PAGES.TEXT_EDITOR ? (
             <>
               <div className="backButton" onClick={backClick}>
@@ -142,9 +146,9 @@ function Dashboard_() {
               </div>
             </>
           ) : null}
-
+          
           {selectedPage === constants.PAGES.MEETING_ROOMS && (
-            <ChatRoom user={user}></ChatRoom>
+            <ChatRoom user={user} setLoading = {setLoading}></ChatRoom>
           )}
           {selectedPage === constants.PAGES.HOME && <BardApiComp></BardApiComp>}
           {selectedPage === constants.PAGES.UPLOAD && <UploadPage />}
@@ -157,6 +161,7 @@ function Dashboard_() {
               setSelectedPage={setSelectedPage}
               setScriptId={setScriptId}
               userInfo = {userInfo}
+              setLoading = {setLoading}
             ></Scripts>
           )}
           {selectedPage === constants.PAGES.TEXT_EDITOR && (
@@ -165,13 +170,14 @@ function Dashboard_() {
               title={title}
               setTitle={setTitle}
               userInfo ={userInfo}
+              setLoading = {setLoading}
             ></TextEditor>
           )}
           {selectedPage === constants.PAGES.POST_VIEW && (
-            <PostScheduleView userInfo={userInfo}> </PostScheduleView>
+            <PostScheduleView userInfo={userInfo} setLoading = {setLoading}> </PostScheduleView>
           )}
           {selectedPage === constants.PAGES.TEAM && (
-            <TeamManage user={user} userInfo={userInfo} changeLastLogin = {changeLastLogin}></TeamManage>
+            <TeamManage user={user} userInfo={userInfo} changeLastLogin = {changeLastLogin} setLoading = {setLoading}></TeamManage>
           )}
         </Col>
       </Row>
