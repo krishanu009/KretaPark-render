@@ -7,7 +7,7 @@ const app = express();
 const path = require("path");
 var cors = require("cors");
 const corsOptions = {
-  origin: 'https://kretapark-ui.onrender.com',
+  origin: 'https://kretapark.onrender.com/',
   methods: ["GET", "POST"],
   credentials:true
 };
