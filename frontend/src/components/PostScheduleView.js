@@ -49,11 +49,13 @@ function PostScheduleView({userInfo, setLoading}) {
     getAllPost();
   }, [userInfo]);
   useEffect(() => {
-    setLoading(true);
-    filterByStatus();
-    setLoading(false);
-    // filterScheduledAndNotScheduled();
-    // fetchInfoOnDate(date.toDateString());
+    const fetchData = async () => {
+      setLoading(true);
+      await filterByStatus();
+      setLoading(false);
+    };
+
+    fetchData();
   }, [allContent]);
   function isEmptyObject(obj) {
     
@@ -114,7 +116,7 @@ function PostScheduleView({userInfo, setLoading}) {
   //   setNotScheduledContent(newNotScheduledContent);
   // };
 
-  const filterByStatus = () => {
+  const filterByStatus = async () => {
     let newToDoContent = allContent.filter((obj) => obj["status"] === "todo");
 
     let newInProgressContent = allContent.filter(
