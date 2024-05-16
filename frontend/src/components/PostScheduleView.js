@@ -47,7 +47,7 @@ function PostScheduleView({ userInfo, setLoading }) {
       await getAllPost();
       setLoading(true);
     };
-    fetchPost;
+    fetchPost();
   }, []);
   useEffect(() => {
     const fetchPost = async () => {
@@ -55,7 +55,7 @@ function PostScheduleView({ userInfo, setLoading }) {
       await getAllPost();
       setLoading(true);
     };
-    fetchPost;
+    fetchPost();
   }, [userInfo]);
   useEffect(() => {
     const fetchData = async () => {
