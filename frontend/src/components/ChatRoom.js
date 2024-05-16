@@ -189,7 +189,8 @@ function ChatRoom({ user, setLoading }) {
   // },[messageData]);
 
   useEffect(() => {
-    const s = io("http://localhost:3001");
+    // const s = io("http://localhost:3001");
+    const s = io();
     setSocket(s);
     // console.log("socket", s);
     // console.log("user", user);
