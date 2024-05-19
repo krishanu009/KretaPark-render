@@ -17,7 +17,7 @@ export default function Header() {
     // .catch((e) => {
     //     console.log(e)
     // });
-    localStorage.setItem("token", "");
+    localStorage.removeItem('token');
     navigate("/");
   };
 

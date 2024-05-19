@@ -18,7 +18,7 @@ import { Form } from "react-bootstrap";
 import PostScheduleView from "./PostScheduleView";
 import TeamManage from "./TeamManage";
 import LoadingSpinner from "./LoadingSpinner";
-
+import { jwtDecode } from 'jwt-decode';
 function Dashboard_() {
   const [theme, setTheme] = useState("light");
   const [selectedPage, setSelectedPage] = useState(constants.PAGES.POST_VIEW);
@@ -39,6 +39,42 @@ function Dashboard_() {
       getUser();
     }
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      
+      const expirationTime = getTokenExpiration(token);
+      console.log("expirationTime",expirationTime);
+      if (expirationTime) {
+        const currentTime = Date.now();
+        const timeLeft = expirationTime - currentTime;
+        console.log("time left",timeLeft);
+        if (timeLeft > 0) {
+          // Set a timeout to log the user out when the token expires
+          setTimeout(() => {
+            autoLogout();
+          }, timeLeft);
+        } else {
+          autoLogout(); // Token already expired
+        }
+      }
+    }
+  }, []);
+  const autoLogout = () =>
+  {
+    console.log("auto logout");
+    localStorage.removeItem('token');
+    navigate("/");
+  }
+  const getTokenExpiration = (token) => {
+    const decoded = jwtDecode(token);
+    if (!decoded.exp) {
+      return null;
+    }
+    console.log("decoded",decoded);
+    return decoded.exp * 1000; // exp is in seconds, convert to milliseconds
+  };
 
   const getUser = async () => {
     axios
