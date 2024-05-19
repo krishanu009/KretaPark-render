@@ -190,7 +190,7 @@ function ChatRoom({ user, setLoading }) {
 
   useEffect(() => {
     // const s = io("http://localhost:3001");
-    const s = io();
+    const s = io('https://kretapark.onrender.com');
     setSocket(s);
     // console.log("socket", s);
     // console.log("user", user);

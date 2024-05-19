@@ -28,7 +28,10 @@ export default function Header() {
   return (
     <div className="header-body">
       <Row>
-        <Col lg="4"></Col>
+        <Col lg="4">
+          
+          <img src ={ theme === "light" ? require('../assets/kretaParklogo.png') : require('../assets/kretaParklogo2.png')} width={150} style={{padding:'15px'}}></img>
+        </Col>
         <Col lg="6"></Col>
         <Col lg="2">
           
