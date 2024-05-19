@@ -429,7 +429,7 @@ function ChatRoom({ user, setLoading }) {
                 </Form>
               </Col>
               <Col lg="2">
-              <Button variant="success"> 
+              <Button variant="success" onClick={sendMessage}> 
               <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
