@@ -14,8 +14,7 @@ function PostScheduleView({ userInfo, setLoading }) {
   const [allContent, setAllContent] = useState([]);
   const [scheduledContent, setScheduledContent] = useState([]);
   const [availableUsers, setAvailableUsers] = useState([
-    { id: "1324", name: "test" },
-    { id: "994", name: "test - 2" },
+   
   ]);
   const [notScheduledContent, setNotScheduledContent] = useState([]);
   const [toDoContent, setTodoContent] = useState([]);
@@ -39,8 +38,10 @@ function PostScheduleView({ userInfo, setLoading }) {
   const [availableScript, setAvailableScript] = useState([]);
 
   useEffect(() => {
+    if(!userInfo.user) return;
     getAllScript();
-  }, []);
+    getTeamMembers();
+  }, [userInfo]);
   useEffect(() => {
     const fetchPost = async () => {
       setLoading(true);
@@ -97,7 +98,7 @@ function PostScheduleView({ userInfo, setLoading }) {
   };
   const getAllScript = async () => {
     await axios
-      .get(process.env.REACT_APP_GET_ALL_SCRIPT, {
+      .get(process.env.REACT_APP_GET_SCRIPTS_BY_TEAMID +  '/' + userInfo.user.lastLogin, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
       })
       .then((res) => {
@@ -110,6 +111,25 @@ function PostScheduleView({ userInfo, setLoading }) {
         return Promise.reject(e);
       });
   };
+
+  const getTeamMembers = async () => {
+    
+
+    await axios
+    .get(process.env.REACT_APP_GET_MEMBERS +  '/' + userInfo.user.lastLogin, {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    })
+    .then((res) => {
+      setAvailableUsers(res.data);
+      console.log("get tem members", res.data);
+      return res.data;
+    })
+    .catch((e) => {
+      console.log(e);
+      return Promise.reject(e);
+    });
+
+  }
   // const filterScheduledAndNotScheduled = () => {
   //   let newScheduledContent = allContent.filter(
   //     (obj) => obj["scheduled"] === true
@@ -520,7 +540,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
-                        fill="white"
+                        fill="currentColor"
                         class="bi bi-pencil-square"
                         viewBox="0 0 16 16"
                       >
@@ -585,7 +605,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                   </div>
                 );
               })}
-              ;
+              
             </div>
           </Col>
           <Col lg="3">
@@ -614,7 +634,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
-                        fill="white"
+                        fill="currentColor"
                         class="bi bi-pencil-square"
                         viewBox="0 0 16 16"
                       >
@@ -677,7 +697,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                   </div>
                 );
               })}
-              ;
+              
             </div>
           </Col>
           <Col lg="3">
@@ -707,7 +727,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
-                        fill="white"
+                        fill="currentColor"
                         class="bi bi-pencil-square"
                         viewBox="0 0 16 16"
                       >
