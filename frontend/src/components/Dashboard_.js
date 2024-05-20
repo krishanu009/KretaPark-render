@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import UploadPage from "./UploadPage";
@@ -19,9 +19,12 @@ import PostScheduleView from "./PostScheduleView";
 import TeamManage from "./TeamManage";
 import LoadingSpinner from "./LoadingSpinner";
 import { jwtDecode } from 'jwt-decode';
+import { ThemeContext } from "../context/ThemeContext";
 function Dashboard_() {
-  const [theme, setTheme] = useState("light");
-  const [selectedPage, setSelectedPage] = useState(constants.PAGES.POST_VIEW);
+  // const [theme, setTheme] = useState("light");
+  const { theme, setTheme } = useContext(ThemeContext);
+  // const [selectedPage, setSelectedPage] = useState(constants.PAGES.POST_VIEW);
+  const [selectedPage, setSelectedPage] = useState();
   const [scripId, setScriptId] = useState();
 
   const navigate = useNavigate();
@@ -43,13 +46,13 @@ function Dashboard_() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      
+      fetchAndSetLocalData();
       const expirationTime = getTokenExpiration(token);
-      console.log("expirationTime",expirationTime);
+      // console.log("expirationTime",expirationTime);
       if (expirationTime) {
         const currentTime = Date.now();
         const timeLeft = expirationTime - currentTime;
-        console.log("time left",timeLeft);
+        // console.log("time left",timeLeft);
         if (timeLeft > 0) {
           // Set a timeout to log the user out when the token expires
           setTimeout(() => {
@@ -61,9 +64,39 @@ function Dashboard_() {
       }
     }
   }, []);
+  useEffect(()=>{
+    changeLoacalData();
+
+  },[theme,selectedPage]);
+  const fetchAndSetLocalData = async () => {
+    let localInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+
+     if(localInfo)
+      {
+        console.log("localinfo",localInfo);
+         setSelectedPage(localInfo.selectedPage);
+        setTheme(localInfo.theme);
+        
+      }
+      else{
+        let newLocalInfo = {theme:'light',selectedPage:constants.PAGES.POST_VIEW};
+
+    localStorage.setItem('userInfo', JSON.stringify(newLocalInfo));
+    console.log("changed user data1", newLocalInfo);
+      }
+  }
+  const changeLoacalData = () => {
+    let localInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if(!selectedPage || !theme) return;
+    let newLocalInfo = {theme,selectedPage};
+
+    localStorage.setItem('userInfo', JSON.stringify(newLocalInfo));
+    console.log("changed user data2", newLocalInfo);
+  }
   const autoLogout = () =>
   {
-    console.log("auto logout");
+    //console.log("auto logout");
     localStorage.removeItem('token');
     navigate("/");
   }
@@ -72,7 +105,7 @@ function Dashboard_() {
     if (!decoded.exp) {
       return null;
     }
-    console.log("decoded",decoded);
+    //console.log("decoded",decoded);
     return decoded.exp * 1000; // exp is in seconds, convert to milliseconds
   };
 
@@ -106,13 +139,13 @@ function Dashboard_() {
       });
   };
   const changeLastLogin = async (lastLogin) => {
-    console.log("invoked");
+    //console.log("invoked");
     let payload = {
       id: user.id,
       lastLogin: lastLogin,
     };
-    console.log(payload);
-    console.log(process.env.REACT_APP_UPDATE_LAST_LOGIN);
+    //console.log(payload);
+    //console.log(process.env.REACT_APP_UPDATE_LAST_LOGIN);
     await axios
       .put(process.env.REACT_APP_UPDATE_LAST_LOGIN, payload, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -130,7 +163,7 @@ function Dashboard_() {
   };
   const backClick = () => {
     setSelectedPage(constants.PAGES.SCRIPTS);
-    console.log("here");
+    //console.log("here");
   };
   return (
     <>

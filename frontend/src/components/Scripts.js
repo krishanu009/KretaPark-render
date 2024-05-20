@@ -18,14 +18,14 @@ function Scripts({ selectedPage, setSelectedPage, setScriptId,userInfo, setLoadi
   //   })
   // },[]);
   useEffect(  ()=>{
-    const fetchData = async () => {if(!userInfo.user.lastLogin) return;
+    const fetchData = async () => {if(!userInfo.user) return;
       setLoading(true);
       await fetchScripts();
      setLoading(false);}
      fetchData();
  },[]);
 
- useEffect( ()=>{ const fetchData = async () => {if(!userInfo.user.lastLogin) return;
+ useEffect( ()=>{ const fetchData = async () => {if(!userInfo.user) return;
   setLoading(true);
   await fetchScripts();
  setLoading(false);}

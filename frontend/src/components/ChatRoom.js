@@ -25,6 +25,56 @@ function ChatRoom({ user, setLoading }) {
   const [newMemEmail, setNewMemEmail] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [newMemMessage, setNewMemMessage] = useState("");
+
+
+  useEffect(() => {
+    
+    // const s = io("http://localhost:3001");
+    const s = io('https://kretapark.onrender.com');
+    setSocket(s);
+    // console.log("socket", s);
+    // console.log("user", user);
+    if (messageRoomId !== "" && user.userName !== "") {
+      let userName = user.userName;
+      s.emit("join_room", { username: userName, room: messageRoomId });
+      console.log("join room emitted");
+      //   s.emit("get_all_messages", messageRoomId);
+
+      // s.on("all_messages", (data) => {
+      //   console.log("all_messages",data);
+      //   setMessageData(data);
+      // });
+    }
+    return () => {
+      s.disconnect();
+    };
+  }, [user]);
+
+  
+
+
+  
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(process.env.REACT_APP_FIND_ROOM_BY_MEMBER_ID + "/" + user.id, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      })
+      .then((res) => {
+        //  setAllScript(res.data);
+        if (!res.data.length) return;
+        setmessageRooms(res.data);
+        setMessageRoomId(res.data[0]._id || "");
+        setRoomMembers(res.data[0].members || []);
+        console.log("my rooms", res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    setLoading(false);
+  }, [user]);
+
   useEffect(() => {
     if (!socket) return;
     socket.on("receive_message", (data) => {
@@ -42,26 +92,6 @@ function ChatRoom({ user, setLoading }) {
     // Remove event listener on component unmount
     return () => socket.off("receive_message");
   }, [socket]);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get(process.env.REACT_APP_FIND_ROOM_BY_MEMBER_ID + "/" + user.id, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      })
-      .then((res) => {
-        //  setAllScript(res.data);
-        if(!res.data.length) return;
-        setmessageRooms(res.data);
-        setMessageRoomId(res.data[0]._id || "");
-        setRoomMembers(res.data[0].members || []);
-        console.log("my rooms", res.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-      setLoading(false);
-  }, []);
 
   useEffect(() => {
     // Scroll to the bottom when new messages are added
@@ -188,27 +218,7 @@ function ChatRoom({ user, setLoading }) {
   //   setMessageData('');
   // },[messageData]);
 
-  useEffect(() => {
-    // const s = io("http://localhost:3001");
-    const s = io('https://kretapark.onrender.com');
-    setSocket(s);
-    // console.log("socket", s);
-    // console.log("user", user);
-    if (messageRoomId !== "" && user.userName !== "") {
-      let userName = user.userName;
-      s.emit("join_room", { username: userName, room: messageRoomId });
-      console.log("join room emitted");
-      //   s.emit("get_all_messages", messageRoomId);
-
-      // s.on("all_messages", (data) => {
-      //   console.log("all_messages",data);
-      //   setMessageData(data);
-      // });
-    }
-    return () => {
-      s.disconnect();
-    };
-  }, []);
+ 
 
   useEffect(() => {
     if (!messageRoomId || !socket) return;
@@ -219,7 +229,7 @@ function ChatRoom({ user, setLoading }) {
       console.log("all_messages hrer", data);
       setMessagesReceived(data);
     });
-  }, [socket, messageRoomId, messageRooms]);
+  }, [socket, messageRoomId, messageRooms, user]);
 
   // useEffect(()=> {
   //   let data = {
@@ -429,8 +439,8 @@ function ChatRoom({ user, setLoading }) {
                 </Form>
               </Col>
               <Col lg="2">
-              <Button variant="success" onClick={sendMessage}> 
-              <svg
+                <Button variant="success" onClick={sendMessage}>
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -440,7 +450,7 @@ function ChatRoom({ user, setLoading }) {
                   >
                     <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
                   </svg>
-              </Button>
+                </Button>
                 {/* <div className="sendButton" onClick={sendMessage}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

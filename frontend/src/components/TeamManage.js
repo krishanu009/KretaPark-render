@@ -12,6 +12,8 @@ function TeamManage({ user, userInfo, changeLastLogin }) {
   const [displayTeams, setDisplayTeams] = useState([]);
   const [displayedLogin, setDisplayedLogin] = useState("");
   useEffect(() => {
+    if(isEmptyOrNotPresent(user)) return;
+    console.log("here");
     axios
       .get(process.env.REACT_APP_GET_MY_TEAMS + "/" + user.id, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -23,7 +25,7 @@ function TeamManage({ user, userInfo, changeLastLogin }) {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (userInfo) {
@@ -37,6 +39,7 @@ function TeamManage({ user, userInfo, changeLastLogin }) {
   }, [myTeams, currTeam]);
 
   const setCurrentLogin = () => {
+    if(isEmptyOrNotPresent(userInfo)) return;
     console.log("set last login", userInfo.user.lastLogin);
     if (userInfo.user.lastLogin) {
       setCurrTeam(userInfo.user.lastLogin);
@@ -63,6 +66,19 @@ function TeamManage({ user, userInfo, changeLastLogin }) {
     let tempDisplayItems = myTeams.filter((item) => item._id != currTeam);
     setDisplayTeams(tempDisplayItems);
   };
+  function isEmptyOrNotPresent(obj) {
+   
+    if (obj == null) {
+      return true;
+    }
+  
+  
+    if (typeof obj === 'object' && Object.keys(obj).length === 0) {
+      return true;
+    }
+  
+    return false;
+  }
 
   return (
     <div class="mainBody">

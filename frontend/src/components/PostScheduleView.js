@@ -585,7 +585,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                   </div>
                 );
               })}
-              
+              ;
             </div>
           </Col>
           <Col lg="3">
@@ -677,7 +677,7 @@ function PostScheduleView({ userInfo, setLoading }) {
                   </div>
                 );
               })}
-              
+              ;
             </div>
           </Col>
           <Col lg="3">
