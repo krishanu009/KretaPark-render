@@ -150,11 +150,7 @@ function TeamManage({ user, userInfo, changeLastLogin, setLoading }) {
         .then((res) => {
           fetchMyTeams();
           handleClose();
-          setShow(false);
-          setNewTeamName("");
-          setNewMemberEmail("");
-          setMenueType("");
-          setErrorMessage("");
+          
         })
         .catch((e) => {
           console.log(e);
@@ -176,6 +172,7 @@ function TeamManage({ user, userInfo, changeLastLogin, setLoading }) {
         .then((res) => {
           console.log("add member result", res.data);
           fetchTeamMembers();
+          handleClose();
         })
         .catch((e) => {
           // console.log(e);
