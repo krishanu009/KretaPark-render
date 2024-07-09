@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect,useRef } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import "../styling/register.css";
@@ -16,6 +16,8 @@ function Login() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorText, setErrorText] = useState("");
     const { theme, setTheme } = useContext(ThemeContext);
+    const [emailButtonText, setEmailButtonText] = useState('Copy');
+    const [passwordButtonText, setPasswordButtonText] = useState('Copy');
  useEffect(() => {
   fetchAndSetLocalData();
  },[])
@@ -55,8 +57,38 @@ function Login() {
   
         }
     }
+
+    const textRef = useRef(null);
+
+   
+  
+    const copyToClipboard = (text, setButtonText) => {
+      navigator.clipboard.writeText(text).then(() => {
+        setButtonText('Copied');
+        setTimeout(() => {
+          setButtonText('Copy');
+        }, 3000);
+      }).catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+    };
   return (
     <div class="container">
+      <div className="loginInfo">
+        <p>Login Info</p>
+        <div className="infoRow">
+          <p>Email: jhon1@test.com</p>
+          <button onClick={() => copyToClipboard('jhon1@test.com', setEmailButtonText)}>
+            {emailButtonText}
+          </button>
+        </div>
+        <div className="infoRow">
+          <p>Password: test123</p>
+          <button onClick={() => copyToClipboard('test123', setPasswordButtonText)}>
+            {passwordButtonText}
+          </button>
+        </div>
+      </div>
     <div className='loginCard'>
         <Form onSubmit={(e)=>loginAction(e)}>
             <h1 style={{ marginLeft: '82px' , color: 'white'}}>LOGIN</h1>

@@ -1,15 +1,61 @@
 .loginCard {
   background-color: rgb(35, 32, 40);
-  padding: 50px;   /* Adjust the left padding as needed */
+  padding: 50px; /* Adjust the left padding as needed */
+  border: 1px solid gray;
+}
+.registerCard
+{
+  background-color: rgb(35, 32, 40);
+  padding: 50px; /* Adjust the left padding as needed */
   border: 1px solid gray;
 }
 .container {
   display: flex;
+
+  padding: 100px;
+}
+.container2
+{
+  display: flex;
   justify-content: center;
   padding: 100px;
-  
 }
-.errorText
-{
+.errorText {
   color: red;
+}
+.loginInfo {
+  font-family: 'Comic Sans MS', cursive;
+  width: 300px;
+  height: 200px;
+  background-color: yellow;
+  margin-right: 180px;
+
+  padding: 20px;
+
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s, width 0.3s, height 0.3s;
+}
+
+.loginInfo:hover {
+  transform: translateY(-10px);
+ 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.loginInfo p {
+  color: #555;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+button {
+ 
 }

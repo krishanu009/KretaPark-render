@@ -46,8 +46,8 @@ function Register() {
   return (
 
 
-    <><div class="container">
-         <div className='loginCard'>
+    <><div class="container2">
+         <div className='registerCard'>
         <Form onSubmit={(e)=>registerAction(e)} >
             <h1 style={{ marginLeft: '54px' , color: 'white'}}>REGISTER</h1>
             <Form.Group className="mb-3"  data-bs-theme="dark">
