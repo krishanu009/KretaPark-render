@@ -72,7 +72,18 @@ const fetchScripts = async () => {
             <div className="docThumbnail" onClick={() => {
               setScriptId(item._id); setSelectedPage(constants.PAGES.TEXT_EDITOR);
               console.log('script id',item._id)}}>
-                
+                <div className="paperclip">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50"
+                  height="50"
+                  fill="black"
+                  class="bi bi-paperclip"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z" />
+                </svg>
+              </div>
                     <p className="docText"><b>Title:</b> {item.title}</p>
                     {/* <p className="docText">Status: {item._id}</p> */}
                 

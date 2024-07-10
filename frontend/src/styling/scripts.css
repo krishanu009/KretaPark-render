@@ -7,12 +7,20 @@
     margin: 10px;
     cursor: pointer;
     border: 1px solid var(--text-color);
-    box-shadow: #282828;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
-/* .docThumbnail:hover
+.docThumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.paperclip
 {
-    border: 5px solid #0024c6;
-} */
+    position: relative;
+    bottom: 20px;
+    float: right;
+    left: 25px;
+}
 .docInfo
 {
     margin-top: 132px;
@@ -34,6 +42,11 @@
 .newDoc
 {
     cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.newDoc:hover {
+    transform: scale(1.05);
+   
 }
 .backButton
 {
@@ -52,12 +65,12 @@
     z-index: 6;
     width: 182px;
 }
-.newDoc:hover
+/* .newDoc:hover
 {
     width: 210px;
     height: 210px;
     
-}
+} */
 .script-container
 {
     margin-top: 105px;
