@@ -17,7 +17,7 @@ import Dashboard_ from "./components/Dashboard_";
 import Login from "./components/Login";
 import { ThemeContext } from "./context/ThemeContext";
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const value = {theme, setTheme};
 
   useEffect(() => {

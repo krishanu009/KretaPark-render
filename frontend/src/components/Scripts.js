@@ -50,10 +50,9 @@ const fetchScripts = async () => {
   return (
     <div className="script-container">
       <Row>
-        <Col lg={2}>
+        <Col xs={6} sm={4} md={3} lg={2}>
           <div className="" onClick={handleClick}>
             <svg
-             
               xmlns="http://www.w3.org/2000/svg"
               width="200"
               height="200"
@@ -66,32 +65,36 @@ const fetchScripts = async () => {
             </svg>
           </div>
         </Col>
-        {
-          allScript.map((item) => (
-            <Col lg={2}>
-            <div className="docThumbnail" onClick={() => {
-              setScriptId(item._id); setSelectedPage(constants.PAGES.TEXT_EDITOR);
-              console.log('script id',item._id)}}>
-                <div className="paperclip">
+        {allScript.map((item) => (
+          <Col xs={6} sm={4} md={3} lg={2}>
+            <div
+              className="docThumbnail"
+              onClick={() => {
+                setScriptId(item._id);
+                setSelectedPage(constants.PAGES.TEXT_EDITOR);
+                console.log("script id", item._id);
+              }}
+            >
+              <div className="paperclip">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="50"
                   height="50"
-                  fill="black"
+                  fill="gray"
                   class="bi bi-paperclip"
                   viewBox="0 0 24 24"
                 >
                   <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z" />
                 </svg>
               </div>
-                    <p className="docText"><b>Title:</b> {item.title}</p>
-                    {/* <p className="docText">Status: {item._id}</p> */}
-                
-              </div>
-              </Col>
-          ))
-        }
-        
+              <p className="docText">
+                <b>Title:</b> {item.title}
+              </p>
+              {/* <p className="docText">Status: {item._id}</p> */}
+            </div>
+          </Col>
+        ))}
+
         {/* <Col lg={2}>
           <div className="docThumbnail"></div>
         </Col> */}

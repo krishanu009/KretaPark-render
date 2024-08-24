@@ -1,21 +1,24 @@
 .docThumbnail
 {
-    background-color: white;
+    background-color: rgb(255,250,104);
     width: 168px;
     height: 197px;
     float: left;
     margin: 10px;
     cursor: pointer;
-    border: 1px solid var(--text-color);
+    /* border: 1px solid var(--text-color); */
+    border: 1px solid black;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    box-shadow: 5px 5px 0px #444C56;
 }
 .docThumbnail:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); */
 }
 .paperclip
 {
+  
     position: relative;
     bottom: 20px;
     float: right;
@@ -27,6 +30,7 @@
     width: 169px;
     height: 69px;
     background-color: #cdcdcd;
+    
 }
 .docInfo:hover
 {

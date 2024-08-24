@@ -256,17 +256,38 @@ function TeamManage({ user, userInfo, changeLastLogin, setLoading }) {
         </div>
       </div> */}
 
-          <Col lg="3" className="borderRight fullHeight borderTop pT-30">
-            <Row>
-              <h2 className="currentLogin">Logged in {displayedLogin}</h2>
-            </Row>
+          <Col lg="3" className="borderRight fullHeight borderTop pT-30 pr-4">
+            {/* <Row>
+             
+            <div className="loggedIn">{displayedLogin}</div>
+
+              {displayTeams.map((item,index) => (
+                  <div className="availableTeam"> {item.title}</div>
+              )
+              
+              )}
+
+            </Row> */}
+            <div className="felx">
+              <div className="loggedIn">{displayedLogin} (logged In)</div>
+              {displayTeams.map((item, index) => (
+                <div
+                  id={item._id}
+                  onClick={(event) => {
+                    changeLastLogin(event.target.id);
+                    console.log(event.target.id);
+                  }}
+                  className="availableTeam"
+                >
+                  {" "}
+                  {item.title}
+                </div>
+              ))}
+            </div>
             <div className="teamListMain">
-              <ListGroup className="listView" data-bs-theme={theme}>
-                {/* <ListGroup.Item>Cras justo odio</ListGroup.Item>
-<ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-<ListGroup.Item>Morbi leo risus</ListGroup.Item>
-<ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-<ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
+              {/* <ListGroup className="listView" data-bs-theme={theme}>
+              
+
                 {displayTeams.map((item, index) => (
                   <ListGroup.Item
                     id={item._id}
@@ -278,7 +299,7 @@ function TeamManage({ user, userInfo, changeLastLogin, setLoading }) {
                     {item.title}{" "}
                   </ListGroup.Item>
                 ))}
-              </ListGroup>
+              </ListGroup> */}
             </div>
           </Col>
           <Col lg="9" className="borderTop pT-30">
@@ -287,7 +308,22 @@ function TeamManage({ user, userInfo, changeLastLogin, setLoading }) {
                 <h2 className="currentLogin">Members </h2>
               </Col>
               <Col lg="2" className="addMemberIcon">
-                <div onClick={() => handleShow("member")}>
+                <div
+                  onClick={() => handleShow("member")}
+                  tabindex="0"
+                  class="plusButton"
+                >
+                  <svg
+                    class="plusIcon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 30 30"
+                  >
+                    <g mask="url(#mask0_21_345)">
+                      <path d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z"></path>
+                    </g>
+                  </svg>
+                </div>
+                {/* <div onClick={() => handleShow("member")}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -302,18 +338,44 @@ function TeamManage({ user, userInfo, changeLastLogin, setLoading }) {
                       d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"
                     />
                   </svg>
-                </div>
+                </div> */}
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Col lg="4">
                 {currTeamMembers.map((item) => (
                   <div class="teamCard">
-                    <p>{item.name}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+</svg>
+                    <p> {item.name}</p>
                   </div>
                 ))}
               </Col>
-            </Row>
+            </Row> */}
+
+            <div className="flex felx-wrap">
+              {currTeamMembers.map((item) => (
+                <div class="teamCard flex flex-col items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="50"
+                    fill="currentColor"
+                    class="bi bi-person-circle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+                    />
+                  </svg>
+                  <p> {item.name}</p>
+                </div>
+              ))}
+            </div>
           </Col>
         </Row>
       </div>

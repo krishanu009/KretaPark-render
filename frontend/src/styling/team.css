@@ -36,9 +36,12 @@
   background-color: var(--second-color);
   padding: 5px;
   margin: 2px;
-  width: 340px;
+  width: 100px;
   color: var(--text-color);
-
+  border: 2px solid rgb(0, 153, 255);
+  border-radius: 10px;
+  justify-items: center;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
 .teamCard:hover
@@ -47,6 +50,8 @@
   /* width: 350px;
   height: */
   cursor: pointer;
+  transform: scale(1.05);
+  border: 2px solid rgb(0, 153, 255);
 
 }
 .currentLogin
@@ -79,4 +84,95 @@
   color: var(--text-color);
   padding-top: 5px;
   cursor: pointer;
+}
+.loggedIn {
+
+  width: 300px;
+  height: 100%;
+  background-color: var(--main-color);
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  border-radius: 10px;
+  border: 2px solid rgb(0, 255, 42);
+  color: var(--text-color);
+}
+
+.availableTeam {
+  width: 300px;
+  height: 100%;
+  background-color: var(--second-color);
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  border-radius: 10px;
+  border: 2px solid rgb(3, 122, 201);
+  margin-top: 20px;
+  color: var(--text-color);
+}
+
+.availableTeam:hover {
+  transform: scale(1.05);
+  border: 2px solid rgb(0, 153, 255);
+  
+}
+.plusButton {
+  /* Config start */
+  --plus_sideLength: 1.5rem;
+  --plus_topRightTriangleSideLength: 0.9rem;
+  /* Config end */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--text-color);
+  width: var(--plus_sideLength);
+  height: var(--plus_sideLength);
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.plusButton::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+}
+
+.plusButton:hover {
+  cursor: pointer;
+}
+
+.plusButton:hover::before {
+  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.plusButton:focus-visible::before {
+  --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.plusButton>.plusIcon {
+  fill: white;
+  width: calc(var(--plus_sideLength) * 0.7);
+  height: calc(var(--plus_sideLength) * 0.7);
+  z-index: 1;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
+}
+
+.plusButton:hover>.plusIcon {
+  fill: black;
+  transform: rotate(180deg);
+}
+
+.plusButton:focus-visible>.plusIcon {
+  fill: black;
+  transform: rotate(180deg);
 }

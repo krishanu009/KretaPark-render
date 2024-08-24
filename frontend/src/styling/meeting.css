@@ -1,139 +1,198 @@
 .chat-area{
-/* padding-top: 200px; */
-    /* height: 100dvh; */
-    /* max-height: 100dvh; */
-    border-left: 2px solid var(--border-color);
-    background-color: var(--chat-window);
-    overflow-y: hidden;
-    padding-left: 0 !important;
-}
-.newChanelButtonDiv
-{
-    padding-top: 87px; 
-}
-.modal-content {
-    background-color: var(--second-color) !important;
-    /* background-color: rgb(34,39,46) !important; */
-    /* color: #9b9797 !important; */
-    color: var(--text-color) !important;
+    /* padding-top: 200px; */
+        /* height: 100dvh; */
+        /* max-height: 100dvh; */
+        border-left: 2px solid var(--border-color);
+        background-color: var(--chat-window);
+        overflow-y: hidden;
+        padding-left: 0 !important;
+    }
+    .newChanelButtonDiv
+    {
+        padding-top: 87px; 
+    }
+    .modal-content {
+        background-color: var(--second-color) !important;
+        /* background-color: rgb(34,39,46) !important; */
+        /* color: #9b9797 !important; */
+        color: var(--text-color) !important;
+        
+        border: var(--bs-modal-border-width) solid rgb(34 38 43);
+      }
+      .modal-header {
+        border-bottom: none !important;;
+      }
+      .modal-footer {
+        border-top: none !important;;
+      }
+      .button {
+        background-color: var(--second-color);
+        color: var(--text-color);
+      }
+      .addMemberButton
+      {
+        color: var(--text-color) !important;
+        background-color: var(--highlight-color) !important;
+        border: none !important;
+      }
+    .chanelList
+    {
+        padding-top: 2px;
+        overflow-y: auto;
+        color: #9b9797;
+        font-weight: bold;
+        max-height: 730px;
+        cursor: pointer;
+    }
+    .chanelSelected
+    {
+        /* color:azure; */
+        color:var(--text-color);
+    }
+    .messagesShow
+    {
+        padding-top: 87px;
+        padding-bottom: 136px;
+        height: 72dvh; /* Set a maximum height */
+        overflow-y: auto;
+        padding-left: 10px;
+    }
+    .chatAreaHeader
+    {
+        padding-top: 67px;
+        height: 110px;
+        width: 100%;
+        background-color: var(--chat-window);
+        margin: 0px;
+        border-bottom: 2px solid var(--border-color);
+    }
+    .participantsIcon
+    {
+        cursor: pointer;
+       
+        
+        
+    }
+    .messageLine
+    {
+        width: 100%;
+        display: block;
+    }
+    .otherMessage
+    {
+        width: fit-content;
+        height: auto;
+        background-color: rgb(100, 104, 105);
+        border-radius: 10px;
+        padding: 10px;
+        color: white;
+        margin-bottom: 10px;
+        
+    }
+    .yourMessage {
+        width: fit-content;
+        height: auto;
+        background-color: rgb(33, 193, 124);
+        border-radius: 10px;
+        padding: 10px;
+        color: white;
+        margin-bottom: 10px;
+        clear: both; /* Add this property to ensure the message appears below the previous one */
+      }
+    .senderName
+    {
+        display: block;
+        font-weight: bold;
     
-    border: var(--bs-modal-border-width) solid rgb(34 38 43);
-  }
-  .modal-header {
-    border-bottom: none !important;;
-  }
-  .modal-footer {
-    border-top: none !important;;
-  }
-  .button {
-    background-color: var(--second-color);
-    color: var(--text-color);
-  }
-  .addMemberButton
-  {
-    color: var(--text-color) !important;
-    background-color: var(--highlight-color) !important;
-    border: none !important;
-  }
-.chanelList
-{
-    padding-top: 2px;
-    overflow-y: auto;
-    color: #9b9797;
-    font-weight: bold;
-    max-height: 730px;
-    cursor: pointer;
-}
-.chanelSelected
-{
-    /* color:azure; */
-    color:var(--text-color);
-}
-.messagesShow
-{
-    padding-top: 87px;
-    padding-bottom: 136px;
-    height: 72dvh; /* Set a maximum height */
-    overflow-y: auto;
-    padding-left: 10px;
-}
-.chatAreaHeader
-{
-    padding-top: 67px;
-    height: 110px;
-    width: 100%;
-    background-color: var(--chat-window);
-    margin: 0px;
-    border-bottom: 2px solid var(--border-color);
-}
-.participantsIcon
-{
-    cursor: pointer;
-   
+    }
+    .receivedTime
+    {
+        font-weight: small;
+        display: block;
+        color: rgb(38, 38, 38);
+        
+    }
+    .writeMessage
+    {
+        /* position: fixed;
+        top: 591px;
+        left: 485px; */
+        /* width:70%; */
+        border-top: 1px solid var(--border-color);
+        background-color: var(--second-color);
+        padding: 10px;
+        
+        
     
+    }
+    .sendButton
+    {
+        /* position: fixed;
+        top: 607px;
+        left: 1350px; */
+        cursor: pointer;
+        /* z-index: 6; */
+    }
+    .sendButton:hover
+    {
+        width: 210px;
+    }
     
-}
-.messageLine
-{
-    width: 100%;
-    display: block;
-}
-.otherMessage
-{
-    width: fit-content;
-    height: auto;
-    background-color: rgb(100, 104, 105);
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    margin-bottom: 10px;
-    
-}
-.yourMessage {
-    width: fit-content;
-    height: auto;
-    background-color: rgb(33, 193, 124);
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    margin-bottom: 10px;
-    clear: both; /* Add this property to ensure the message appears below the previous one */
-  }
-.senderName
-{
-    display: block;
-    font-weight: bold;
-
-}
-.receivedTime
-{
-    font-weight: small;
-    display: block;
-    color: rgb(38, 38, 38);
-    
-}
-.writeMessage
-{
-    /* position: fixed;
-    top: 591px;
-    left: 485px; */
-    /* width:70%; */
-    border-top: 1px solid var(--border-color);
-    background-color: var(--second-color);
-    padding: 10px;
-    
-    
-
-}
-.sendButton
-{
-    /* position: fixed;
-    top: 607px;
-    left: 1350px; */
-    cursor: pointer;
-    /* z-index: 6; */
-}
-.sendButton:hover
-{
-    width: 210px;
-}
+    /* From Uiverse.io by andrew-demchenk0 */ 
+    .button {
+        position: relative;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border: 1px solid #34974d;
+        background-color: #3aa856;
+      }
+      
+      .button, .button__icon, .button__text {
+        transition: all 0.3s;
+      }
+      
+      .button .button__text {
+        transform: translateX(30px);
+        color: #fff;
+        font-weight: 600;
+      }
+      
+      .button .button__icon {
+        position: absolute;
+        transform: translateX(109px);
+        height: 100%;
+        width: 39px;
+        background-color: #34974d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .button .svg {
+        width: 30px;
+        stroke: #fff;
+      }
+      
+      .button:hover {
+        background: #34974d;
+      }
+      
+      .button:hover .button__text {
+        color: transparent;
+      }
+      
+      .button:hover .button__icon {
+        width: 148px;
+        transform: translateX(0);
+      }
+      
+      .button:active .button__icon {
+        background-color: #2e8644;
+      }
+      
+      .button:active {
+        border: 1px solid #2e8644;
+      }

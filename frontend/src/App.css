@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
   --main-color: rgb(34, 39, 46);
   --second-color: rgb(28, 33, 40);
@@ -28,7 +33,7 @@ body {
   margin-bottom: 18px;
   cursor: pointer;
   color: var(--text-color);
-  transition: width 0.5s ease;
+  transition: width 0.3s ease;
 }
 .selectedPageIcon {
   background-color: var(--highlight-color);
@@ -42,10 +47,10 @@ body {
   transition: width 0.2s ease;
 }
 .side-bar-text {
-  opacity: 0;
-  visibility: hidden;
-position:absolute;
-  display: inline;
+  opacity: 0; 
+   visibility: hidden;
+/* position:absolute;
+  display: inline; */
   transition: opacity 0.3s ease, visibility 0.3s ease;
   padding-left: 10px;
   padding-top: 5px;
@@ -64,9 +69,9 @@ position:absolute;
   position: fixed;
   top: 65px;
   padding-top: 23px;
-  border-right: 2px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
   z-index: 2;
-  transition: width 0.2s ease;
+  transition: width 0.5s ease;
 }
 
 .side-bar-body:hover {
@@ -88,7 +93,7 @@ position:absolute;
   height: 65px;
   position: fixed;
   right: -1px;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   z-index: 5;
 }
 .lightButton {

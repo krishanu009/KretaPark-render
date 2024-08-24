@@ -1,0 +1,72 @@
+.sidebar {
+    position: fixed;
+    top: 65px;
+    width: 60px;
+    height: 100vh;
+    background-color: var(--second-color);
+    border-right: 1px solid var(--border-color);
+    color: var(--text-color);
+    transition: width 0.2s ease;
+    z-index: 10;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.sidebar.expanded {
+    width: 200px;
+}
+
+.top-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.menu-items {
+    width: 100%;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    overflow: hidden;
+    justify-content: center; /* Center icon in collapsed state */
+}
+
+.menu-item .icon {
+    font-size: 24px;
+    display: block;
+    margin-right: 0; /* Reset margin when collapsed */
+}
+
+.menu-item .menu-text {
+    display: none; 
+    margin-left: 10px;/* Hide text in collapsed state */
+}
+
+.sidebar.expanded .menu-item {
+    justify-content: flex-start; /* Align icon and text to the left when expanded */
+}
+
+.sidebar.expanded .menu-item .icon {
+    margin-right: 10px; /* Add margin when expanded */
+}
+
+.sidebar.expanded .menu-item .menu-text {
+    display: block; /* Show text when expanded */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-item.active {
+    background-color: var(--highlight-color);
+}
