@@ -80,7 +80,7 @@ function Dashboard_() {
         
       }
       else{
-        let newLocalInfo = {theme:'light',selectedPage:constants.PAGES.POST_VIEW};
+        let newLocalInfo = {theme:'dark',selectedPage:constants.PAGES.POST_VIEW};
 
     localStorage.setItem('userInfo', JSON.stringify(newLocalInfo));
     console.log("changed user data1", newLocalInfo);
