@@ -159,12 +159,12 @@ io.on("connection", (socket) => {
     socket.join(room);
     let __createdtime__ = Date.now();
     console.log(`${username} has joined the chat room`);
-    socket.to(room).emit("receive_message", {
-      userId: "--",
-      message: `${username} has joined the chat room`,
-      username: CHAT_BOT,
-      __createdtime__,
-    });
+    // socket.to(room).emit("receive_message", {
+    //   userId: "--",
+    //   message: `${username} has joined the chat room`,
+    //   username: CHAT_BOT,
+    //   __createdtime__,
+    // });
     allUsers.push({ id: socket.id, username, room });
     chatRoomUsers = allUsers.filter((user) => user.room === room);
     socket.to(room).emit("chatroom_users", chatRoomUsers);

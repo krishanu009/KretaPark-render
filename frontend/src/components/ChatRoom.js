@@ -98,7 +98,9 @@ function ChatRoom({ user, setLoading }) {
     messagesContainerRef.current.scrollTop =
       messagesContainerRef.current.scrollHeight;
   }, [messagesRecieved]);
-
+  useEffect(()=>{
+    reloadRoomMembers();
+    },[messageRoomId,messageRooms])
   const sendMessage = () => {
     if (message !== "") {
       const __createdtime__ = Date.now();
@@ -126,6 +128,16 @@ function ChatRoom({ user, setLoading }) {
 
   const handleCloseNewMem = () => setShowNewMem(false);
   const handleShowNewMem = () => setShowNewMem(true);
+
+  const reloadRoomMembers = () => {
+    if(!messageRoomId) return;
+    let room = messageRooms.find( item => (
+      item._id === messageRoomId
+    ));
+    if(!room) return;
+    setRoomMembers(room.members);
+
+  }
   const addNewMember = async () => {
     if (!newMemEmail) {
       setNewMemMessage("Please Enter an Email");
