@@ -30,20 +30,31 @@ function App() {
   useEffect(() => {
     if(theme === 'dark')
     {
-      document.documentElement.style.setProperty("--main-color", "rgb(34, 39, 46)");
-      document.documentElement.style.setProperty("--second-color","rgb(28,33,40)");
-      document.documentElement.style.setProperty("--text-color","rgb(255, 255, 255)");
+      // document.documentElement.style.setProperty("--main-color", "rgb(34, 39, 46)");
+      // document.documentElement.style.setProperty("--second-color","rgb(28,33,40)");
+      // document.documentElement.style.setProperty("--text-color","rgb(255, 255, 255)");
+      // document.documentElement.style.setProperty("--border-color","rgb(68,76,86)");
+      // document.documentElement.style.setProperty("--highlight-color","#444C56");
+      // // document.documentElement.style.setProperty("--highlight-color","rgb(2,100,126)");
+      // document.documentElement.style.setProperty("--third-color","rgb(68,76,86)");
+      // document.documentElement.style.setProperty("--chat-window","rgb(35, 32, 40)");
+      document.documentElement.style.setProperty("--main-color", "rgb(8,17,37)");
+      document.documentElement.style.setProperty("--second-color","rgb(15,23,42)");
+      document.documentElement.style.setProperty("--text-color","rgb(250,250,250)");
       document.documentElement.style.setProperty("--border-color","rgb(68,76,86)");
       document.documentElement.style.setProperty("--highlight-color","#444C56");
-      document.documentElement.style.setProperty("--third-color","rgb(68,76,86)");
+      // document.documentElement.style.setProperty("--highlight-color","rgb(2,100,126)");
+      document.documentElement.style.setProperty("--third-color","rgb(0,255,160)");
       document.documentElement.style.setProperty("--chat-window","rgb(35, 32, 40)");
+
 
     }
     else if(theme === 'light')
     {
       document.documentElement.style.setProperty("--main-color", "white");
       document.documentElement.style.setProperty("--second-color","rgb(246,248,250)");
-      document.documentElement.style.setProperty("--text-color","rgb(87,96,106)");
+      // document.documentElement.style.setProperty("--text-color","rgb(87,96,106)");
+      document.documentElement.style.setProperty("--text-color","black");
       document.documentElement.style.setProperty("--border-color","rgb(208,215,222)");
       document.documentElement.style.setProperty("--highlight-color","rgb(204, 206, 208)");
       document.documentElement.style.setProperty("--third-color","white");

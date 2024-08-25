@@ -72,19 +72,21 @@ function Dashboard_() {
     let localInfo = JSON.parse(localStorage.getItem('userInfo'));
 
 
-     if(localInfo)
-      {
-        console.log("localinfo",localInfo);
-         setSelectedPage(localInfo.selectedPage);
-        setTheme(localInfo.theme);
-        
-      }
-      else{
-        let newLocalInfo = {theme:'dark',selectedPage:constants.PAGES.POST_VIEW};
+    if (localInfo) {
+      console.log("localinfo", localInfo);
+      setSelectedPage(localInfo.selectedPage);
+      setTheme(localInfo.theme);
+    } else {
+      let newLocalInfo = {
+        theme: "dark",
+        selectedPage: constants.PAGES.POST_VIEW,
+      };
 
-    localStorage.setItem('userInfo', JSON.stringify(newLocalInfo));
-    console.log("changed user data1", newLocalInfo);
-      }
+      localStorage.setItem("userInfo", JSON.stringify(newLocalInfo));
+      console.log("changed user data1", newLocalInfo);
+      setSelectedPage(constants.PAGES.POST_VIEW);
+      setTheme("dark");
+    }
   }
   const changeLoacalData = () => {
     let localInfo = JSON.parse(localStorage.getItem('userInfo'));
