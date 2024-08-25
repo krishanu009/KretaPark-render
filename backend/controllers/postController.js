@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/postModel");
-
+const Team = require("../models/teamModel");
 //@desc create a new post
 //@route POST /api/post/new
 //@access private
@@ -13,6 +13,25 @@ const newPost = asyncHandler(async (req, res) => {
     throw new Error("All the fileds are mendatory!");
   }
   try {
+
+    const currentUser = req.user;
+    const team = await Team.findById(companyId);
+
+    if (!team) {
+      res.status(404);
+      throw new Error("Company not found");
+    }
+  
+  
+    const isMember = team.members.some(element => element.id === currentUser.id);
+  
+    if (!isMember) {
+      res.status(403);
+      throw new Error("User is not a member of the team");
+    }
+  
+
+
     const post = await Post.create({
       title,
       scheduled,
@@ -66,7 +85,6 @@ const allPostByCompanyID = asyncHandler(async (req, res) => {
     console.error("Error fetching posts:", error);
     res.status(500).json({ message: "Server error" });
   }
- 
 });
 
 //@desc update a post
@@ -75,14 +93,15 @@ const allPostByCompanyID = asyncHandler(async (req, res) => {
 const updatePost = asyncHandler(async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    if (!post) {
+      res.status(404);
+      throw new Error("Post not found");
+    }
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.status(200).json(updatedPost);
-  } catch (error) {
-    res.status(404);
-    throw new Error(" Post not found");
-  }
+  } catch (error) {}
 });
 
 const deleteAllPost = asyncHandler(async (req, res) => {
@@ -96,4 +115,59 @@ const deleteAllPost = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { newPost, allPost, updatePost, deleteAllPost, allPostByCompanyID };
+//@desc delete a post
+//@route POST /api/post/delete/:id
+//@access private
+const deletePost = asyncHandler(async (req, res) => {
+
+
+  if (!req.params.id) {
+    res.status(400);
+    throw new Error("Please enter id");
+  }
+
+  const currentUser = req.user;
+
+  // Find the post by ID
+  const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    res.status(404);
+    throw new Error("Post not found");
+  }
+
+  const team = await Team.findById(post.companyId);
+
+  if (!team) {
+    res.status(404);
+    throw new Error("Company not found");
+  }
+
+
+  const isMember = team.members.some(element => element.id === currentUser.id);
+
+  if (!isMember) {
+    res.status(403);
+    throw new Error("User is not a member of the team");
+  }
+
+
+  const deletedPost = await Post.deleteOne({ _id: req.params.id });
+
+  if (deletedPost.deletedCount === 0) {
+    res.status(404);
+    throw new Error("Failed to delete the post");
+  }
+
+  res.status(200).json({ message: "Post deleted successfully" });
+});
+
+
+module.exports = {
+  newPost,
+  allPost,
+  updatePost,
+  deleteAllPost,
+  allPostByCompanyID,
+  deletePost
+};

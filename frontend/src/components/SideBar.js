@@ -23,8 +23,20 @@ function SideBar({ selectedPage, setSelectedPage }) {
     // .catch((e) => {
     //     console.log(e)
     // });
-    localStorage.removeItem("token");
-    navigate("/");
+    const userConfirmed = window.confirm('Are you sure you want to log out?');
+
+    if (userConfirmed) {
+
+      localStorage.removeItem("token");
+      navigate("/");
+    
+      console.log('User confirmed. Proceeding with action...');
+  
+    } else {
+     
+      console.log('User canceled. No action taken.');
+    }
+   
   };
 
   return (

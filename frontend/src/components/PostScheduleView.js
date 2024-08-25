@@ -363,6 +363,36 @@ function PostScheduleView({ userInfo, setLoading }) {
       minute: "numeric",
     });
 
+    const handleDeletePost = async (id) => {
+      const userConfirmed = window.confirm(
+        "Are you sure you want to delete the post?"
+      );
+  
+      if (userConfirmed) {
+        console.log(process.env.REACT_APP_DELETE_POST);
+        await axios
+          .get(process.env.REACT_APP_DELETE_POST + "/" + id, {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+          })
+          .then((res) => {
+            // setAllContent(res.data);
+            console.log("delete post api", res.data);
+            getAllPost();
+          })
+          .catch((e) => {
+            console.log("delete post err", e);
+          });
+      } else {
+      }
+    };
+  
+    const removeAssignedUser = (item) => {
+   
+      let currAssignedUser = allAssigned.filter(el => el != item);
+      console.log(currAssignedUser);
+      setAllAssigned(currAssignedUser);
+    }
+
     return (
       <>
         <Modal show={show} onHide={handleClose} data-bs-theme={theme}>
@@ -411,16 +441,35 @@ function PostScheduleView({ userInfo, setLoading }) {
             </Row>
             <br></br>
             <Row>
-              <Col lg="12">
+              <div className="flex flex-wrap">
                 {allAssigned.map((item) => (
                   <>
-                    <Badge bg="secondary">
+                    {/* <Badge bg="secondary">
                       {item.name}({item.role})
-                    </Badge>
+                    </Badge> */}
+                    <div className="relative">
+                      <div className="absolute cursor-pointer">
+                        <svg
+                        onClick={(e)=>{removeAssignedUser(item)}}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-circle-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
+                        </svg>
+                      </div>
+                      <span class="pl-4 bg-indigo-100 text-indigo-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">
+                        {item.name}({item.role})
+                      </span>
+                    </div>
+  
                     <br></br>
                   </>
                 ))}
-              </Col>
+              </div>
             </Row>
             <br></br>
             <Row>
@@ -476,10 +525,26 @@ function PostScheduleView({ userInfo, setLoading }) {
                 Create
               </Button> */}
   
-  <button onClick={handleShow} type="button" class="create-button">
-    <span class="button__text">Add Item</span>
-    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
-  </button>
+              <button onClick={handleShow} type="button" class="create-button">
+                <span class="button__text">Add Item</span>
+                <span class="button__icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke="currentColor"
+                    height="24"
+                    fill="none"
+                    class="svg"
+                  >
+                    <line y2="19" y1="5" x2="12" x1="12"></line>
+                    <line y2="12" y1="12" x2="19" x1="5"></line>
+                  </svg>
+                </span>
+              </button>
             </Col>
           </Row>
           <Row>
@@ -487,56 +552,51 @@ function PostScheduleView({ userInfo, setLoading }) {
               <div className="listTitle flex space-x-2">
                 <span className="colTitle">To Do </span>
                 <div className="mt-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-hourglass-top"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5m2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1z" />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-hourglass-top"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5m2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1z" />
+                  </svg>
                 </div>
-                
               </div>
             </Col>
             <Col lg="3">
               <div className="listTitle flex space-x-2">
                 <span className="colTitle">In Progress </span>
-                <div  className="mt-1">
-  
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-hourglass-split"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
-                </svg>
-  
+                <div className="mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-hourglass-split"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
+                  </svg>
                 </div>
-               
               </div>
             </Col>
             <Col lg="3">
               <div className="listTitle flex space-x-2">
                 <span className="colTitle">Done </span>
                 <div className="mt-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="green"
-                  class="bi bi-check2"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="green"
+                    class="bi bi-check2"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
+                  </svg>
                 </div>
-                
               </div>
             </Col>
           </Row>
@@ -579,11 +639,29 @@ function PostScheduleView({ userInfo, setLoading }) {
                           />
                         </svg>
                       </div>
+                      <div
+                        onClick={(e) => {
+                          handleDeletePost(item._id);
+                        }}
+                        className="float-right pr-2 delete"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-trash-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                        </svg>
+                      </div>
   
                       <div className="taskTitle">{item.title}</div>
   
-                      <div className="taskDate">
+                      <div className="flex">
                         <svg
+                          className="mt-1"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -594,10 +672,11 @@ function PostScheduleView({ userInfo, setLoading }) {
                           <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                           <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                         </svg>
-                        &nbsp;{formattedDate}
+                        <div>&nbsp;{formattedDate}</div>
                       </div>
-                      <div className="taskScript">
+                      <div className="flex taskScript">
                         <svg
+                          className="mt-1"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -633,7 +712,6 @@ function PostScheduleView({ userInfo, setLoading }) {
                     </div>
                   );
                 })}
-                
               </div>
             </Col>
             <Col lg="3">
@@ -673,10 +751,28 @@ function PostScheduleView({ userInfo, setLoading }) {
                           />
                         </svg>
                       </div>
+                      <div
+                        onClick={(e) => {
+                          handleDeletePost(item._id);
+                        }}
+                        className="float-right pr-2 delete"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-trash-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                        </svg>
+                      </div>
                       <div className="taskTitle">{item.title}</div>
   
-                      <div className="taskDate">
+                      <div className="flex">
                         <svg
+                          className="mt-1"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -687,10 +783,11 @@ function PostScheduleView({ userInfo, setLoading }) {
                           <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                           <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                         </svg>
-                        &nbsp;{formattedDate}
+                        <div>&nbsp;{formattedDate}</div>
                       </div>
-                      <div className="taskScript">
+                      <div className="flex taskScript">
                         <svg
+                          className="mt-1"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -725,7 +822,6 @@ function PostScheduleView({ userInfo, setLoading }) {
                     </div>
                   );
                 })}
-                
               </div>
             </Col>
             <Col lg="3">
@@ -766,10 +862,29 @@ function PostScheduleView({ userInfo, setLoading }) {
                           />
                         </svg>
                       </div>
+                      <div
+                        onClick={(e) => {
+                          handleDeletePost(item._id);
+                        }}
+                        className="float-right pr-2 delete"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-trash-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                        </svg>
+                      </div>
+  
                       <div className="taskTitle">{item.title}</div>
   
-                      <div className="taskDate">
+                      <div className="flex">
                         <svg
+                          className="mt-1"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -780,10 +895,11 @@ function PostScheduleView({ userInfo, setLoading }) {
                           <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                           <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                         </svg>
-                        &nbsp;{formattedDate}
+                        <div>&nbsp;{formattedDate}</div>
                       </div>
-                      <div className="taskScript">
+                      <div className="flex taskScript">
                         <svg
+                          className="mt-1"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"

@@ -100,7 +100,7 @@
 }
 .taskDate
 {
-    display: block;
+    display: inline-block;
     
     /* font-weight: bolder; */
 }
@@ -171,5 +171,8 @@
   .create-button:active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
+  }
+  .delete:hover{
+   color: red;
   }
 
